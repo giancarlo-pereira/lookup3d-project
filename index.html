@@ -287,12 +287,19 @@
     <div class="column is-full-width">
       <h2 class="title is-3">Results</h2>
       <div class="content has-text-justified">
-        Results text goes here.
+        <p>
+          We validate <i>LookUp3D</i> across three hardware configurations:
+          a standard DLP projector, an inexpensive LCD projector, and a
+          custom-built analog projector for high-speed. With the high-speed
+          prototype, we achieve accurate reconstructions at 450 fps and 
+          1 Megapixel resolution. We recover the free-fall of a bunny at 
+          450 fps with relative motion errors below 2%.
+        </p>
       </div>
       <h3 class="title is-4">Static Results</h3>
       <div class="content has-text-justified">
         <p>
-          <i>LookUp3D</i>achieves reconstruction quality comparable to traditional structured light with
+          <i>LookUp3D</i> achieves reconstruction quality comparable to traditional structured light with
           the DLP projector, and significantly outperforms it with the LCD projector. While the quality
           of traditional Gray Code reconstruction deteriorates significantly with the low-quality projector
           -- due to its reliance on accurate triangulation -- <i>LookUp3D</i>remains robust.
@@ -312,63 +319,19 @@
       </div>
       <h3 class="title is-4">Dynamic Results</h3>
       <div class="content has-text-justified">
-          <p>We use a custom analog projector that can flicker LEDs at frequencies above 1kHz.
-          We expose a pattern onto a 35-mm color film slide, develop it, and place in front of one of the LEDs,
-          allowing the projection of an RGB pattern at extremely high frequencies.
-          </p>
+        <p>
+          Since we do not need to explicitly model the projector for scanning,
+          we use a custom analog projector that can flicker LEDs at frequencies above 1kHz.
+          We expose a pattern onto a 35-mm color film slide, develop it,
+          and place in front of one of the LEDs, allowing the projection of an RGB patterm
+          at extremely high frequencies. We can then 3D scan slow-motion scenes.
+        </p>
       </div>
-      <div class="hero-body">
-        <div class="container">
-          <div id="results-carousel" class="carousel results-carousel">
-            <div class="item item-bending-pla-100fps">
-              <video poster="" id="bending-pla-100fps" autoplay controls muted loop playsinline height="100%">
-                <source src="./static/videos/_mac_bending_pla_low_rank_loss_0dot2_5x.mp4"
-                        type="video/mp4">
-              </video>
-            </div>
-            <div class="item item-squeezing-cube-100fps">
-              <video poster="" id="squeezing-cube-100fps" autoplay controls muted loop playsinline height="100%">
-                <source src="./static/videos/_mac_squeezing_silicone_cube_low_rank_loss_0dot2_5x.mp4"
-                        type="video/mp4">
-              </video>
-            </div>
-            <div class="item item-giancarlo-hand-100fps">
-              <video poster="" id="giancarlo-hand-100fps" autoplay controls muted loop playsinline height="100%">
-                <source src="./static/videos/_mac_giancarlo_hand_low_rank_loss_0dot2_5x.mp4"
-                        type="video/mp4">
-              </video>
-            </div>
-          </div>
-        </div>
+      <div class="content has-text-centered">
+          <video id="reconstruction-video" controls="" muted="" preload="" playsinline="" width="100%">
+            <source src="./static/videos/dynamic_reconstruction_videos.mp4" type="video/mp4">
+          </video>
       </div>
-
-      <div class="hero-body">
-        <div class="container">
-          <div id="results-carousel" class="carousel results-carousel">
-            <div class="item item-bunny-ear-450fps">
-              <video poster="" id="bunny-ear-450fps" autoplay controls muted loop playsinline height="100%">
-                <source src="./static/videos/_mac_bunny_ear_oscillating_low_rank_loss_0dot2_15x.mp4"
-                        type="video/mp4">
-              </video>
-            </div>
-            <div class="item item-bunny-drop-450fps">
-              <video poster="" id="bunny-drop-450fps" autoplay controls muted loop playsinline height="100%">
-                <source src="./static/videos/_mac_bunny_drop_low_rank_loss_0dot2_15x.mp4"
-                        type="video/mp4">
-              </video>
-            </div>
-            <div class="item item-cloth-blowing-450fps">
-              <video poster="" id="cloth-blowing-450fps" autoplay controls muted loop playsinline height="100%">
-                <source src="./static/videos/_mac_gray_cloth_blowing_low_rank_loss_0dot2_30x.mp4"
-                        type="video/mp4">
-              </video>
-            </div>
-
-
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
 </section>
@@ -377,11 +340,14 @@
   <div class="container is-max-desktop content">
     <h2 class="title">Acknowledgments</h2>
   This work was partially supported by the the NSF grants OAC-2411349 and OAC-2411221.
-  Giancarlo Pereira was partially supported by the New York University Tandon School of Engineering Fellowship.
+  Giancarlo Pereira was partially supported by the New York University
+  Tandon School of Engineering Fellowship.
 
-  We thank NYU IT High Performance Computing services, for help with resources, services, and expertise.
-  We also would like to thank [Professor Christopher Musco](https://www.chrismusco.com) for fruitful discussions on low-rank approximation and
-  would like to thank [Arvi Gjoka](https://www.arvigjoka.com) for making a silicone bunny.
+  We thank NYU IT High Performance Computing services,
+  for help with resources, services, and expertise.
+  We also would like to thank [Professor Christopher Musco](https://www.chrismusco.com)
+  for fruitful discussions on low-rank approximation and would like tos thank
+  [Arvi Gjoka](https://www.arvigjoka.com) for making a silicone bunny.
   </div>
 </section>
 
