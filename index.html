@@ -238,8 +238,9 @@
       <h3 class="title is-4">LookUp3D Calibration</h3>
       <div class="content has-text-justified">
           <p>
-            The goal of calibration is to create the unique dictionary $C_i(d): \mathbb{R}^+ \to \mathbb{R}^3$
-            between depth and color for each pixel $i$. Our calibration procedure uses a planar calibration target
+            The goal of calibration is to create the unique dictionary 
+            <math display="inline"><msub><mi>C</mi><mi>i</mi></msub>(d) <mo>:</mo> <msup><mi>R</mi><mo>+</mo></msup> \to <msup><mi>R</mi><mn>3</mn></msup></math>
+            between depth and color for each pixel <math display="inline"><mi>i</mi></math>. Our calibration procedure uses a planar calibration target
             (filled with fiduciary markers) moved by an off-the-shelf linear stage. We project a fixed pattern
             sequence onto the calibration target and record, per-pixel, the color reading and the depth measurement.
           </p>
@@ -260,14 +261,19 @@
       <div class="content has-text-justified">
           <p>
           The scanning procedure is as follows: we project the same fixed pattern sequence from calibratioon now 
-          onto an object of unknown geometry and capture an image of intensity $I$. Reconstruction compares
-          each pixel in the measured color image $I$ with the calibrated per-pixel lookup table.
+          onto an object of unknown geometry and capture an image of intensity <math display="inline"><mi>I</mi></math>. Reconstruction compares
+          each pixel in the measured color image <math display="inline"><mi>I</mi></math> with the calibrated per-pixel lookup table.
           In its unoptimized form, the operation is a simple, embarrassingly parallel lookup to find the depth
-          whose color is closest to the observed pixel $I_i$, or
-          $$ d_i^* = argmin_{d \in \mathcal{D}} \left\|C_i(d) - I_i\right\|_2 $$,
+          whose color is closest to the observed pixel <math display="inline"><msub><mi>I</mi><mi>i</mi></msub></math>, or
+          <math display="block">
+            <mrow>
+            <msubsup><mi>d</mi><mi>i</mi><mo>*</mo></msubsup> <mo>=</mo> <msub><mo>argmin</mo><mi>d</mi></msub> <mo>|</mo> <msub><mi>C</mi><mi>i</mi></msub>(d) <mo>-</mo> <msub><mi>I</mi><mi>i</mi></msub>    <msub><mo>|</mo> <mn>2</mn></msub>
+            </mrow>
+          </math>
           where the search is done offline on a discrete set of depths $\mathcal{D}$.
-          The residual $ r_i= \left\| C_i(d_i^*) - I_i \right\|_2 $ provides a per-pixel
-          confidence measure that can be thresholded to filter unreliable points.
+          The residual 
+          <math display="inline">  <msub><mi>r</mi><mi>i</mi></msub> <mo>=</mo> <mo>|</mo> <msub><mi>C</mi><mi>i</mi></msub>(d) <mo>-</mo> <msub><mi>I</mi><mi>i</mi></msub>    <msub><mo>|</mo> <mn>2</mn></msub></math>
+          provides a per-pixel confidence measure that can be thresholded to filter unreliable points.
           </p>
       </div>
       <!-- <div class="content has-text-centered">
