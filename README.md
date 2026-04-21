@@ -2,7 +2,7 @@
 
 ### [Paper](https://arxiv.org/abs/2405.14882) | [Data](https://doi.org/10.58153/1n4p2-ygf77) | [Code](https://github.com/geometryprocessing/scanner)
 
-![Bunny in Free Fall at 450 FPS](static/teaser.png)
+![Bunny in Free Fall at 450 FPS](static/images/teaser.png)
 
 <strong>Giancarlo Pereira*<sup>2</sup>, Yidan Gao*<sup>1</sup>, Yurii Piadyk*<sup>2</sup>, David Fouhey<sup>1,2</sup>, Claudio T. Silva<sup>2,3</sup>, Daniele Panozzo<sup>1</sup></strong>
 
