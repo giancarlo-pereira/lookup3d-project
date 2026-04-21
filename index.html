@@ -239,7 +239,7 @@
       <div class="content has-text-justified">
           <p>
             The goal of calibration is to create the unique dictionary 
-            <math display="inline"><msub><mi>C</mi><mi>i</mi></msub>(d) <mo>:</mo> <msup><mi>R</mi><mo>+</mo></msup> \to <msup><mi>R</mi><mn>3</mn></msup></math>
+            <math display="inline"><msub><mi>C</mi><mi>i</mi></msub>(d) <mo>:</mo> <msup><mi>R</mi><mo>+</mo></msup> <mo>→</mo> \to <msup><mi>R</mi><mn>3</mn></msup></math>
             between depth and color for each pixel <math display="inline"><mi>i</mi></math>. Our calibration procedure uses a planar calibration target
             (filled with fiduciary markers) moved by an off-the-shelf linear stage. We project a fixed pattern
             sequence onto the calibration target and record, per-pixel, the color reading and the depth measurement.
@@ -270,7 +270,7 @@
             <msubsup><mi>d</mi><mi>i</mi><mo>*</mo></msubsup> <mo>=</mo> <msub><mo>argmin</mo><mi>d</mi></msub> <mo>|</mo> <msub><mi>C</mi><mi>i</mi></msub>(d) <mo>-</mo> <msub><mi>I</mi><mi>i</mi></msub>    <msub><mo>|</mo> <mn>2</mn></msub>
             </mrow>
           </math>
-          where the search is done offline on a discrete set of depths $\mathcal{D}$.
+          where the search is done offline on a discrete set of depths.
           The residual 
           <math display="inline">  <msub><mi>r</mi><mi>i</mi></msub> <mo>=</mo> <mo>|</mo> <msub><mi>C</mi><mi>i</mi></msub>(d) <mo>-</mo> <msub><mi>I</mi><mi>i</mi></msub>    <msub><mo>|</mo> <mn>2</mn></msub></math>
           provides a per-pixel confidence measure that can be thresholded to filter unreliable points.
@@ -308,7 +308,7 @@
           <i>LookUp3D</i> achieves reconstruction quality comparable to traditional structured light with
           the DLP projector, and significantly outperforms it with the LCD projector. While the quality
           of traditional Gray Code reconstruction deteriorates significantly with the low-quality projector
-          -- due to its reliance on accurate triangulation -- <i>LookUp3D</i>remains robust.
+          -- due to its reliance on accurate triangulation -- <i>LookUp3D</i> remains robust.
         </p>
       </div>
       <div class="columns is-vcentered interpolation-panel">
