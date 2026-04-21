@@ -88,7 +88,7 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">Nerfies: Deformable Neural Radiance Fields</h1>
+          <h1 class="title is-1 publication-title">LookUp3D: Data-Drive 3D Scanning</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
               <a href="https://giancarlo-pereira.github.io">Giancarlo Pereira</a>*<sup>2</sup>,</span>
@@ -110,7 +110,7 @@
 
           <div class="is-size-5 publication-authors">
             <span class="author-block"><sup>1</sup>New York University, Courant Institute of Mathematical Sciences,</span>
-            <span class="author-block"><sup>2</sup>New York University, Tandon School of Engineering</span>
+            <span class="author-block"><sup>2</sup>New York University, Tandon School of Engineering,</span>
             <span class="author-block"><sup>3</sup>New York University, Center for Data Science</span>
           </div>
 
@@ -185,7 +185,7 @@
                 type="video/mp4">
       </video>
       <h2 class="subtitle has-text-centered">
-        <span class="dnerf">LookUp3D</span>is a data-driven structured light scanning that uses a pixel-wise lookup table to bypass explicit projector calibration.
+        <i>LookUp3D</i> is a data-driven structured light scanning that uses a pixel-wise lookup table to bypass explicit projector calibration.
       </h2>
     </div>
   </div>
@@ -199,7 +199,7 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-          We introduce <span class="dnerf">LookUp3D</span>, a method that enables, for the first time, 3D scanning at 450 frames per second at 1 Megapixel,
+          We introduce <i>LookUp3D</i>, a method that enables, for the first time, 3D scanning at 450 frames per second at 1 Megapixel,
           or 1,450 frames per second at 0.4 Megapixel in an environment with controlled lighting.
           The key idea is to use a per-pixel lookup table that maps colors to depths, which is built using a linear stage.
           Imperfections, such as lens-distortion and sensor defects are baked into the calibration.
@@ -225,6 +225,154 @@
   <!-- </div> -->
 </section>
 
+<section class="section" id="pipeline">
+  <div class="coontainer is-max-desktop content">
+    <div class="colum is-full-width">
+      <h2 class="title is-3">LookUp3D Pipeline</h2>
+      <div class="content has-text-justified">
+        Pipeline text goes here.
+      </div>
+      <div class="columns is-vcentered interpolation-panel">
+      <img src="./static/images/pipeline_cleaner.png" class="interpolation-image" alt="Interpolate start reference image.">
+      </div>
+      <h3 class="title is-4">LookUp3D Calibration</h3>
+      <div class="content has-text-justified">
+          <p>
+            The goal of calibration is to create the unique dictionary $C_i(d): \mathbb{R}^+ \to \mathbb{R}^3$
+            between depth and color for each pixel $i$. Our calibration procedure uses a planar calibration target
+            (filled with fiduciary markers) moved by an off-the-shelf linear stage. We project a fixed pattern
+            sequence onto the calibration target and record, per-pixel, the color reading and the depth measurement.
+          </p>
+          <p>
+            We deviate from traditional structured light: to recover depth, we rely solely on the calibration board
+            and the linear stage, without the need to model the projector defocusing, vignetting, intrinsic and extrinsic parameters.
+            We test this hypothesis with a set-up where the quality of the optics of the projector does not alter the results 
+            achieved by <i>LookUp3D</i>, whereas a traditional structured light method reliant on triangulation suffers a
+            lot in quality of reconstruction.
+          </p>
+      </div>
+      <!-- <div class="content has-text-centered">
+          <video id="calibration-video" controls="" muted="" preload="" playsinline="" width="100%">
+            <source src="./static/videos/???.mp4" type="video/mp4">
+          </video>
+      </div> -->
+      <h3 class="title is-4">LookUp3D Reconstruction</h3>
+      <div class="content has-text-justified">
+          <p>
+          The scanning procedure is as follows: we project the same fixed pattern sequence from calibratioon now 
+          onto an object of unknown geometry and capture an image of intensity $I$. Reconstruction compares
+          each pixel in the measured color image $I$ with the calibrated per-pixel lookup table.
+          In its unoptimized form, the operation is a simple, embarrassingly parallel lookup to find the depth
+          whose color is closest to the observed pixel $I_i$, or
+          $$ d_i^* = argmin_{d \in \mathcal{D}} \left\|C_i(d) - I_i\right\|_2 $$,
+          where the search is done offline on a discrete set of depths $\mathcal{D}$.
+          The residual $ r_i= \left\| C_i(d_i^*) - I_i \right\|_2 $ provides a per-pixel
+          confidence measure that can be thresholded to filter unreliable points.
+          </p>
+      </div>
+      <!-- <div class="content has-text-centered">
+          <video id="reconstruction-video" controls="" muted="" preload="" playsinline="" width="100%">
+            <source src="./static/videos/???.mp4" type="video/mp4">
+          </video>
+      </div> -->
+      <div class="columns is-vcentered interpolation-panel">
+        <img src="./static/images/residual_filtering.png" class="interpolation-image" alt="Residual Filtering of LookUp3D Reconstruction.">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="results">
+  <div class="coontainer is-max-desktop content">
+    <div class="colum is-full-width">
+      <h2 class="title is-3">Results</h2>
+      <div class="content has-text-justified">
+        Results text goes here.
+      </div>
+      <h3 class="title is-4">Static Results</h3>
+      <div class="content has-text-justified">
+        <p>
+          <i>LookUp3D</i>achieves reconstruction quality comparable to traditional structured light with
+          the DLP projector, and significantly outperforms it with the LCD projector. While the quality
+          of traditional Gray Code reconstruction deteriorates significantly with the low-quality projector
+          -- due to its reliance on accurate triangulation -- <i>LookUp3D</i>remains robust.
+        </p>
+      </div>
+      <div class="columns is-vcentered interpolation-panel">
+      <img src="./static/images/static_figures_square_no_white.png" class="interpolation-image" alt="Comparison of LookUp3D against Traditional Structured Light with Gray Code patterns.">
+      </div>
+      <div class="content has-text-justified">
+        <p>
+          We show below a chess board, a paint brush, a 3D-printed house, and a monkey statue, all reconstructed with 11 channels.
+          These scenes were captured with our DLP Projector with ceiling lights on.
+        </p>
+      </div>
+      <div class="columns is-vcentered interpolation-panel">
+      <img src="./static/images/static_lights_on.png" class="interpolation-image" alt="Four Results of LookUp3D.">
+      </div>
+      <h3 class="title is-4">Dynamic Results</h3>
+      <div class="content has-text-justified">
+          <p>We use a custom analog projector that can flicker LEDs at frequencies above 1kHz.
+          We expose a pattern onto a 35-mm color film slide, develop it, and place in front of one of the LEDs,
+          allowing the projection of an RGB pattern at extremely high frequencies.
+          </p>
+      </div>
+      <div class="hero-body">
+        <div class="container">
+          <div id="results-carousel" class="carousel results-carousel">
+            <div class="item item-bending-pla-100fps">
+              <video poster="" id="bending-pla-100fps" autoplay controls muted loop playsinline height="100%">
+                <source src="./static/videos/_mac_bending_pla_low_rank_loss_0dot2_5x.mp4"
+                        type="video/mp4">
+              </video>
+            </div>
+            <div class="item item-squeezing-cube-100fps">
+              <video poster="" id="squeezing-cube-100fps" autoplay controls muted loop playsinline height="100%">
+                <source src="./static/videos/_mac_squeezing_silicone_cube_low_rank_loss_0dot2_5x.mp4"
+                        type="video/mp4">
+              </video>
+            </div>
+            <div class="item item-giancarlo-hand-100fps">
+              <video poster="" id="giancarlo-hand-100fps" autoplay controls muted loop playsinline height="100%">
+                <source src="./static/videos/_mac_giancarlo_hand_low_rank_loss_0dot2_5x.mp4"
+                        type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-body">
+        <div class="container">
+          <div id="results-carousel" class="carousel results-carousel">
+            <div class="item item-bunny-ear-450fps">
+              <video poster="" id="bunny-ear-450fps" autoplay controls muted loop playsinline height="100%">
+                <source src="./static/videos/_mac_bunny_ear_oscillating_low_rank_loss_0dot2_15x.mp4"
+                        type="video/mp4">
+              </video>
+            </div>
+            <div class="item item-bunny-drop-450fps">
+              <video poster="" id="bunny-drop-450fps" autoplay controls muted loop playsinline height="100%">
+                <source src="./static/videos/_mac_bunny_drop_low_rank_loss_0dot2_15x.mp4"
+                        type="video/mp4">
+              </video>
+            </div>
+            <div class="item item-cloth-blowing-450fps">
+              <video poster="" id="cloth-blowing-450fps" autoplay controls muted loop playsinline height="100%">
+                <source src="./static/videos/_mac_gray_cloth_blowing_low_rank_loss_0dot2_30x.mp4"
+                        type="video/mp4">
+              </video>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <section class="section" id="acknowledgments">
   <div class="container is-max-desktop content">
     <h2 class="title">Acknowledgments</h2>
@@ -240,7 +388,8 @@
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code>	@inproceedings{10.1145/3757377.3763986,
+    <pre><code>
+    @inproceedings{10.1145/3757377.3763986,
     author = {Pereira, Giancarlo and Gao, Yidan and Piadyk, Yurii and Fouhey, David and Silva, Claudio T and Panozzo, Daniele},
     title = {LookUp3D: Data-Driven 3D Scanning},
     year = {2025},
@@ -264,11 +413,7 @@
 <footer class="footer">
   <div class="container">
     <div class="content has-text-centered">
-      <a class="icon-link"
-         href="./static/videos/nerfies_paper.pdf">
-        <i class="fas fa-file-pdf"></i>
-      </a>
-      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+      <a class="icon-link" href="https://github.com/giancarlo-pereira" class="external-link" disabled>
         <i class="fab fa-github"></i>
       </a>
     </div>
