@@ -217,7 +217,9 @@
     <div class="column is-full-width">
       <h2 class="title is-3">LookUp3D Pipeline</h2>
       <div class="content has-text-justified">
-        Pipeline text goes here.
+        Our scanning method relies on a per-pixel lookup table (LUT) <math display="inline"><msub><mi>C</mi><mi>i</mi></msub><mo>(</mo><mi>d</mi><mo>)</mo> </math> 
+        from scene depth <math  display="inline"><mi>d</mi></math> to observed color values at camera pixel <math display="inline"><mi>i</mi></math>.
+        Once this unique mapping is established during calibration, depth can be inferred at runtime by value lookup.
       </div>
       <div class="columns is-vcentered interpolation-panel">
       <img src="./static/images/pipeline_cleaner.png" class="interpolation-image" alt="LookUp3D Pipeline.">
@@ -226,7 +228,7 @@
       <div class="content has-text-justified">
           <p>
             The goal of calibration is to create the unique dictionary 
-            <math display="inline"><msub><mi>C</mi><mi>i</mi></msub>(d) <mo>:</mo> <msup><mi>R</mi><mo>+</mo></msup> <mo>→</mo> \to <msup><mi>R</mi><mn>3</mn></msup></math>
+            <math display="inline"><msub><mi>C</mi><mi>i</mi></msub><mo>(</mo><mi>d</mi><mo>)</mo> <mo>:</mo> <msup><mi>R</mi><mo>+</mo></msup> <mo>→</mo> \to <msup><mi>R</mi><mn>3</mn></msup></math>
             between depth and color for each pixel <math display="inline"><mi>i</mi></math>. Our calibration procedure uses a planar calibration target
             (filled with fiduciary markers) moved by an off-the-shelf linear stage. We project a fixed pattern
             sequence onto the calibration target and record, per-pixel, the color reading and the depth measurement.
@@ -254,12 +256,12 @@
           whose color is closest to the observed pixel <math display="inline"><msub><mi>I</mi><mi>i</mi></msub></math>, or
           <math display="block">
             <mrow>
-            <msubsup><mi>d</mi><mi>i</mi><mo>*</mo></msubsup> <mo>=</mo> <msub><mo>argmin</mo><mi>d</mi></msub> <mo>|</mo> <msub><mi>C</mi><mi>i</mi></msub>(d) <mo>-</mo> <msub><mi>I</mi><mi>i</mi></msub>    <msub><mo>|</mo> <mn>2</mn></msub>
+            <msubsup><mi>d</mi><mi>i</mi><mo>*</mo></msubsup> <mo>=</mo> <msub><mo>argmin</mo><mi>d</mi></msub> <mo>|</mo> <msub><mi>C</mi><mi>i</mi></msub><mo>(</mo><mi>d</mi><mo>)</mo>  <mo>-</mo> <msub><mi>I</mi><mi>i</mi></msub>    <msub><mo>|</mo> <mn>2</mn></msub>
             </mrow>
           </math>
           where the search is done offline on a discrete set of depths.
           The residual 
-          <math display="inline">  <msub><mi>r</mi><mi>i</mi></msub> <mo>=</mo> <mo>|</mo> <msub><mi>C</mi><mi>i</mi></msub>(d) <mo>-</mo> <msub><mi>I</mi><mi>i</mi></msub>    <msub><mo>|</mo> <mn>2</mn></msub></math>
+          <math display="inline">  <msub><mi>r</mi><mi>i</mi></msub> <mo>=</mo> <mo>|</mo> <msub><mi>C</mi><mi>i</mi></msub><mo>(</mo><mi>d</mi><mo>)</mo> <mo>-</mo> <msub><mi>I</mi><mi>i</mi></msub>    <msub><mo>|</mo> <mn>2</mn></msub></math>
           provides a per-pixel confidence measure that can be thresholded to filter unreliable points.
           </p>
       </div>
